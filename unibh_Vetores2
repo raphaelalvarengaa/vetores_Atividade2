@@ -1,0 +1,394 @@
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.Random;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Exercicio1();
+        Exercicio2();
+        Exercicio3();
+        Exercicio4();
+        Exercicio5();
+        Exercicio6();
+        Exercicio7();
+        Exercicio8();
+        Exercicio9();
+        Exercicio10();
+        Exercicio11();
+        Exercicio12();
+        Exercicio13();
+        Exercicio14();
+        Exercicio15();
+        Exercicio16();
+        Exercicio17();
+        Exercicio18();
+        Exercicio19();
+        Exercicio20();
+    }
+    private static void Exercicio1() {
+        Scanner scanner = new Scanner(System.in);
+        int[] vetor = new int[10];
+
+        System.out.println("Digite 10 números inteiros:");
+        for (int i = 0; i < vetor.length; i++) {
+            System.out.print("Posição " + i + ": ");
+            vetor[i] = scanner.nextInt();
+        }
+
+        System.out.println("\n--- Números Primos Encontrados ---");
+        for (int i = 0; i < vetor.length; i++) {
+            if (ehPrimo(vetor[i])) {
+                System.out.println("Número primo: " + vetor[i] + " na posição (índice): " + i);
+            }
+        }
+    }
+
+    public static boolean ehPrimo(int n) {
+        if (n <= 1) return false;
+        for (int i = 2; i <= Math.sqrt(n); i++) {
+            if (n % i == 0) return false;
+        }
+        return true;
+    }
+
+    private static void Exercicio2() {
+        Scanner scanner = new Scanner(System.in);
+        int[] v1 = new int[10];
+        int[] v2 = new int[10];
+        int[] resultante = new int[20];
+
+        System.out.println("Preencha o primeiro vetor:");
+        for (int i = 0; i < 10; i++) v1[i] = scanner.nextInt();
+
+        System.out.println("Preencha o segundo vetor:");
+        for (int i = 0; i < 10; i++) v2[i] = scanner.nextInt();
+
+        int j = 0;
+        for (int i = 0; i < 10; i++) {
+            resultante[j++] = v1[i];
+            resultante[j++] = v2[i];
+        }
+
+        System.out.println("Vetor Intercalado:");
+        for (int num : resultante) {
+            System.out.print(num + " ");
+        }
+    }
+
+    private static void Exercicio3() {
+
+        Random random = new Random(); //tive que pesquisar sobre essa mecânica: https://youtu.be/YXqstM-Uv7Y?si=RJ_VLZ2cMt0AB9hx
+        int[] vetor = new int[10];
+        double soma = 0;
+
+        System.out.print("Números gerados: ");
+        for (int i = 0; i < vetor.length; i++) {
+            vetor[i] = random.nextInt(100); // 0 a 99
+            soma += vetor[i];
+            System.out.print(vetor[i] + " ");
+        }
+        double media = soma / vetor.length;
+        System.out.println("Média dos elementos: " + media);
+    }
+
+    private static void Exercicio4() {
+        Random random = new Random();
+        int[] vetor = new int[20];
+        boolean encontrou = false;
+
+        System.out.print("Vetor: ");
+        for (int i = 0; i < vetor.length; i++) {
+            vetor[i] = random.nextInt(30) + 1; // 1 a 30
+            System.out.print(vetor[i] + " ");
+            if (vetor[i] == 25) {
+                encontrou = true;
+            }
+        }
+        if (encontrou) {
+            System.out.println("O número 25 existe no vetor! Oba.");
+        } else {
+            System.out.println("O número 25 NÃO foi encontrado. Que pena.");
+        }
+    }
+
+    private static void Exercicio5() {
+        Random random = new Random();
+        int[] vetor = new int[15];
+        int indiceEncontrado = -1;
+
+        System.out.print("Vetor: ");
+        for (int i = 0; i < vetor.length; i++) {
+            vetor[i] = random.nextInt(50) + 1;
+            System.out.print(vetor[i] + " ");
+            if (vetor[i] == 20 && indiceEncontrado == -1) {
+                indiceEncontrado = i;
+            }
+        }
+
+        System.out.println();
+        if (indiceEncontrado != -1) {
+            System.out.println("O número 20 foi encontrado no índice: " + indiceEncontrado);
+        } else {
+            System.out.println("O número 20 NÃO existe nesse vetor.");
+        }
+    }
+    private static void Exercicio6() {
+        Random random = new Random();
+        Scanner scanner = new Scanner(System.in);
+        int[] vetor = new int[30];
+
+        System.out.print("Vetor gerado: ");
+        for (int i = 0; i < vetor.length; i++) {
+            vetor[i] = random.nextInt(100) + 1;
+            System.out.print(vetor[i] + " ");
+        }
+        System.out.print("Digite um número para remover: ");
+        int valorRemover = scanner.nextInt();
+
+        // Contar quantos elementos restantes teremos
+        int ocorrencias = 0;
+        for (int num : vetor) {
+            if (num == valorRemover) ocorrencias++;
+        }
+        if (ocorrencias == 0) {
+            System.out.println("Valor não encontrado no vetor.");
+        } else {
+            int[] novoVetor = new int[vetor.length - ocorrencias];
+            int j = 0;
+            for (int num : vetor) {
+                if (num != valorRemover) {
+                    novoVetor[j++] = num;
+                }
+            }
+
+            System.out.print("Vetor após a remoção: ");
+            for (int num : novoVetor) {
+                System.out.print(num + " ");
+            }
+        }
+    }
+    private static void Exercicio7() {
+        Scanner scanner = new Scanner(System.in);
+        double[] numeros = new double[5];
+
+        System.out.println("Digite 5 números decimais:");
+        for (int i = 0; i < numeros.length; i++) {
+            numeros[i] = scanner.nextDouble();
+        }
+        double maior = numeros[0];
+        double menor = numeros[0];
+
+        for (int i = 1; i < numeros.length; i++) {
+            if (numeros[i] > maior) maior = numeros[i];
+            if (numeros[i] < menor) menor = numeros[i];
+        }
+
+        System.out.println("Maior valor: " + maior);
+        System.out.println("Menor valor: " + menor);
+    }
+    private static void Exercicio8() {
+        Random random = new Random();
+        int[] vetorA = new int[15];
+        int[] vetorB = new int[15];
+
+        System.out.print("Vetor A: ");
+        for (int i = 0; i < vetorA.length; i++) {
+            vetorA[i] = random.nextInt(100);
+            System.out.print(vetorA[i] + " ");
+        }
+
+        // Copiando de trás para frente
+        for (int i = 0; i < vetorA.length; i++) {
+            vetorB[i] = vetorA[vetorA.length - 1 - i];
+        }
+
+        System.out.print("\nVetor B (Reverso): ");
+        for (int num : vetorB) {
+            System.out.print(num + " ");
+        }
+    }
+    private static void Exercicio9() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Quantos recibos deseja imprimir? ");
+        int quant = scanner.nextInt();
+
+        int contador = 1;
+        while (contador <= quant) {
+            System.out.println("Recibo nº " + contador);
+            contador++;
+        }
+    }
+    private static void Exercicio10() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Digite o número da tabuada desejada: ");
+        int numero = scanner.nextInt();
+
+        System.out.println("--- Tabuada do " + numero + " ---");
+        for (int i = 1; i <= 10; i++) {
+            System.out.println(numero + " x " + i + " = " + (numero * i));
+        }
+    }
+    private static void Exercicio11() {
+        Scanner scanner = new Scanner(System.in);
+        double soma = 0;
+
+        for (int i = 1; i <= 10; i++) {
+            System.out.print("Digite a temperatura " + i + ": ");
+            soma += scanner.nextDouble();
+        }
+
+        double media = soma / 10;
+        System.out.println("A temperatura média é: " + media + " °C");
+    }
+    private static void Exercicio12() {
+        System.out.println("Contagem de produtos com quantidades pares:");
+        for (int i = 1; i <= 50; i++) {
+            if (i % 2 == 0) {
+                System.out.print(i + " ");
+            }
+        }
+    }
+    private static void Exercicio13() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Digite o valor de N: ");
+        int n = scanner.nextInt();
+
+        System.out.println("Números primos até " + n + ":");
+
+        for (int i = 2; i <= n; i++) {
+            boolean ehPrimo = true;
+
+            // Testa se o número 'i' é divisível por algum número menor que ele
+            for (int j = 2; j <= Math.sqrt(i); j++) {
+                if (i % j == 0) {
+                    ehPrimo = false;
+                    break;
+                }
+            }
+
+            if (ehPrimo) {
+                System.out.print(i + " ");
+            }
+        }
+        System.out.println(); // Pula uma linha no final
+    }
+    private static void Exercicio14() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Digite a quantidade de etapas de produção: ");
+        int etapas = scanner.nextInt();
+
+        double tempoTotal = 0;
+        for (int i = 1; i <= etapas; i++) {
+            System.out.print("Digite o tempo da etapa " + i + " (em minutos): ");
+            tempoTotal += scanner.nextDouble();
+        }
+
+        System.out.println("Tempo total de produção: " + tempoTotal + " minutos.");
+    }
+    private static void Exercicio15() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Digite a quantidade de termos de Fibonacci (N): ");
+        int n = scanner.nextInt();
+
+        long a = 0, b = 1;
+        System.out.print("Prazos Fibonacci: ");
+        for (int i = 0; i < n; i++) {
+            System.out.print(a + " ");
+            long proximo = a + b;
+            a = b;
+            b = proximo;
+        }
+    }
+    private static void Exercicio16() {
+        Scanner scanner = new Scanner(System.in);
+        int[] respostas = new int[5];
+
+        for (int i = 0; i < 5; i++) {
+            System.out.print("Digite a resposta do entrevistado " + (i + 1) + ": ");
+            respostas[i] = scanner.nextInt();
+        }
+
+        System.out.println("Respostas na ordem inversa:");
+        for (int i = 4; i >= 0; i--) {
+            System.out.print(respostas[i] + " ");
+        }
+    }
+    private static void Exercicio17() {
+        Scanner scanner = new Scanner(System.in);
+        double soma = 0;
+
+        for (int i = 1; i <= 10; i++) {
+            System.out.print("Digite a nota do aluno " + i + ": ");
+            soma += scanner.nextDouble();
+        }
+
+        double media = soma / 10;
+        System.out.println("Média acadêmica da turma: " + media);
+    }
+    private static void Exercicio18() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Digite a 1ª temperatura: ");
+        double maior = scanner.nextDouble();
+
+        for (int i = 2; i <= 8; i++) {
+            System.out.print("Digite a " + i + "ª temperatura: ");
+            double temp = scanner.nextDouble();
+            if (temp > maior) {
+                maior = temp;
+            }
+        }
+
+        System.out.println("A maior temperatura registrada foi: " + maior + " °C");
+    }
+    private static void Exercicio19() {
+        Scanner scanner = new Scanner(System.in);
+        int[] estoque = {101, 201, 301, 401, 501, 601};
+
+        System.out.print("Digite o código do produto: ");
+        int codigoBuscado = scanner.nextInt();
+
+        boolean encontrado = false;
+        for (int codigo : estoque) {
+            if (codigo == codigoBuscado) {
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (encontrado) {
+            System.out.println("Produto código " + codigoBuscado + " ENCONTRADO no estoque.");
+        } else {
+            System.out.println("Produto código " + codigoBuscado + " NÃO cadastrado.");
+        }
+    }
+    private static void Exercicio20(){ //pedi ajuda da IA para resolver esse...
+        Scanner scanner = new Scanner(System.in);
+        double[] precos = new double[10];
+
+        System.out.println("Digite o preço de 10 produtos:");
+        for (int i = 0; i < precos.length; i++) {
+            System.out.print("Preço " + (i + 1) + ": R$ ");
+            precos[i] = scanner.nextDouble();
+        }
+
+        // Ordena o vetor do menor para o maior
+        Arrays.sort(precos);
+
+        System.out.println("\nPreços ordenados (ordem crescente):");
+        for (double preco : precos) {
+            System.out.printf("R$ %.2f \n", preco);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
